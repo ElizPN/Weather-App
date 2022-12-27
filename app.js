@@ -9,6 +9,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   msg.textContent = "";
+
   msg.classList.remove("visible");
 
   let inputValue = input.value;
@@ -44,6 +45,19 @@ form.addEventListener("submit", (e) => {
       // Return whether or not the existing content matches the form input value
       return content == inputValue.toLowerCase();
     });
-    console.log(filteredArray);
+
+    if (filteredArray.length > 0) {
+      console.log(msg);
+
+      msg.textContent = `You already know the weather for ${
+        filteredArray[0].querySelector(".city__name").textContent
+      } ...otherwise be more specific by providing the country code as well 😉`;
+      msg.classList.add("visible");
+
+      form.reset();
+      input.focus();
+
+      return;
+    }
   }
 });
