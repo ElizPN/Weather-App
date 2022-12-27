@@ -50,7 +50,7 @@ form.addEventListener("submit", (e) => {
       console.log(msg);
 
       msg.textContent = `You already know the weather for ${
-        filteredArray[0].querySelector(".city__name").textContent
+        filteredArray[0].querySelector(".city_name").textContent
       } ...otherwise be more specific by providing the country code as well 😉`;
       msg.classList.add("visible");
 
