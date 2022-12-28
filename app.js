@@ -60,4 +60,21 @@ form.addEventListener("submit", (e) => {
       return;
     }
   }
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${apiKey}&units=metric`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.cod == "404") {
+        throw new Error(`${data.cod}, ${data.message}`);
+      }
+
+      const { main, name, sys, weather } = data;
+      console.log(sys);
+    })
+    .catch(() => {
+      msg.textContent = "Please search for a valid city!'";
+      msg.classList.add("visible");
+    });
 });
