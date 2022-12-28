@@ -29,7 +29,6 @@ form.addEventListener("submit", (e) => {
       if (inputValue.includes(",")) {
         if (inputValue.split(",")[1].length > 2) {
           inputValue = inputValue.split(",")[0];
-          console.log(inputValue);
 
           // Get the content from the existing city
           content = cityName;
@@ -47,8 +46,6 @@ form.addEventListener("submit", (e) => {
     });
 
     if (filteredArray.length > 0) {
-      console.log(msg);
-
       msg.textContent = `You already know the weather for ${
         filteredArray[0].querySelector(".city_name").textContent
       } ...otherwise be more specific by providing the country code as well 😉`;
@@ -71,7 +68,26 @@ form.addEventListener("submit", (e) => {
       }
 
       const { main, name, sys, weather } = data;
-      console.log(sys);
+
+      const icon = `img/weather/${weather[0]["icon"]}.svg`;
+
+      const li = document.createElement("li");
+
+      const markup = `
+      	<figure>
+      		<img src="${icon}" alt="${weather[0]["description"]}">
+      	</figure>
+      	<div>
+      		<h2>${Math.round(main.temp)}<sup>°C</sup></h2>
+      		<p class="city_conditions">${weather[0]["description"].toUpperCase()}</p>
+      		<h3><span class="city_name">${name}</span><span class="city_country">${
+        sys.country
+      }</span></h3>
+      	</div>
+      `;
+
+      li.innerHTML = markup;
+      list.appendChild(li);
     })
     .catch(() => {
       msg.textContent = "Please search for a valid city!'";
