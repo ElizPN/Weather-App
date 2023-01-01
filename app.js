@@ -35,7 +35,7 @@ form.addEventListener("submit", (e) => {
         } else {
           // Country code is valid so keep both city and country
           content = `${cityName},${cityCountry}`;
-          console.log(content);
+
         }
       } else {
         // Only the <city> format is used
